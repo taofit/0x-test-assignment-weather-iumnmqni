@@ -20,8 +20,19 @@ body {
   justify-content: center;
   align-items: center;
 
-  background: linear-gradient(to bottom, #011e33, #625a72);
   color: white;
+}
+#root.morning {
+  background: linear-gradient(to bottom, #81C5E5, #DC927F);
+}
+#root.afternoon {
+  background: linear-gradient(to bottom, #4982AD, #90BBD880);
+}
+#root.evening {
+  background: linear-gradient(to bottom, #6F6D8C, #BC615A);
+}
+#root.night {
+  background: linear-gradient(to bottom, #011e33, #3D3551);
 }
 
 #root > div {
@@ -204,4 +215,31 @@ body {
   background-size: 80px 100%;
   background-position: center;
   border-radius: 5px;
+}
+
+/* Loading Indicator Styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ccc;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
