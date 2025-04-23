@@ -31,6 +31,7 @@ export type CurrentResponse = {
         lon: number;
         name: string;
     }
+    temperatureRange: [number, number];
 };
 
 export type LocationResponse = {
@@ -44,3 +45,9 @@ export type LocationResponse = {
         Elevation: { Metric: { Value: number; Unit: string } };
     };
 };
+
+export type Location = {
+    lat: number;
+    lon: number;
+    name: string;
+}

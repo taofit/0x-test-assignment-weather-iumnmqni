@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import './style.css'
 
-import { Thunder } from './weather/Thunder'
 import { getBackgroundClass } from './utils/background'
-import { formatHour, formatWeekday } from './utils/date'
-import { Rain } from './weather/Rain'
 import {
     GetWeatherDaily,
     GetWeatherHourly,
     GetCurrentWeather,
     GetGeoLocation,
-} from './weather/GetWeather'
+} from './weather/GetWeatherData'
 import {
     DailyForecastsResponse,
     HourlyResponse,
     CurrentResponse,
+    Location,
 } from './types/types'
-
-import { currentWeather, hourly, dailyForecast } from './data'
+import { Header } from './components/Header'
+import { HourlyForecast } from './components/HourlyForecast'
+import { DailyForecast } from './components/DailyForecast'
+import { Loading } from './components/Loading'
 
 export default function App() {
-    const [current, setCurrent] = useState<CurrentResponse>()
+    const [current, setCurrent] = useState<CurrentResponse | null>(null)
+    const [location, setLocation] = useState<Location | null>(null)
     const [forecast, setForecast] = useState<HourlyResponse[]>([])
     const [daily, setDaily] = useState<DailyForecastsResponse[]>([])
     const [loading, setLoading] = useState(true)
@@ -33,6 +34,7 @@ export default function App() {
             const daily = localStorage.getItem('daily')
             const current = localStorage.getItem('current')
             const locationKey = localStorage.getItem('locationKey')
+            const location = localStorage.getItem('location')
 
             try {
                 if (forecast && forecast !== 'undefined') {
@@ -48,6 +50,9 @@ export default function App() {
                 if (locationKey && locationKey !== 'undefined') {
                     setLocationKey(JSON.parse(locationKey))
                 }
+                if (location && location !== 'undefined') {
+                    setLocation(JSON.parse(location))
+                }
             } catch (error) {
                 console.error('Error parsing local storage data:', error)
             } finally {
@@ -60,17 +65,14 @@ export default function App() {
     useEffect(() => {
         const fetchLocation = async (lat: number, lon: number) => {
             const locationResponse = await GetGeoLocation(lat, lon)
-            const { Key } = locationResponse
+            const { Key, EnglishName } = locationResponse
             localStorage.setItem('locationKey', Key)
             setLocationKey(Key)
 
-            setCurrent((prev) =>
-                prev
-                    ? {
-                          ...prev,
-                          location: { name: Key, lat, lon },
-                      }
-                    : undefined
+            setLocation({ name: EnglishName, lat, lon })
+            localStorage.setItem(
+                'location',
+                JSON.stringify({ name: EnglishName, lat, lon })
             )
         }
         navigator.geolocation.getCurrentPosition((pos) => {
@@ -81,9 +83,9 @@ export default function App() {
 
     useEffect(() => {
         const fetchWeatherData = async () => {
-			if (!locationKey) {
-				return
-			}
+            if (!locationKey) {
+                return
+            }
             setLoading(true) // Set loading to true before fetching data
             try {
                 GetGeoLocation
@@ -98,8 +100,18 @@ export default function App() {
                 setForecast(forecast)
                 localStorage.setItem('forecast', JSON.stringify(forecast))
 
-                setCurrent(current)
-                localStorage.setItem('current', JSON.stringify(current))
+                setCurrent({
+                    ...current,
+                    location: location || undefined,
+                    temperatureRange: [
+                        daily[0].Temperature.Minimum.Value,
+                        daily[0].Temperature.Maximum.Value,
+                    ],
+                })
+                localStorage.setItem(
+                    'current',
+                    JSON.stringify({ ...current, location: current.location })
+                )
             } catch (error) {
                 console.error('Error fetching weather data:', error)
             } finally {
@@ -122,86 +134,14 @@ export default function App() {
     }, [])
 
     if (loading) {
-        return (
-            <div className="loading-container">
-                <div className="loading-spinner"></div>
-                <p>Loading Weather Data...</p>
-            </div>
-        )
+        return <Loading />
     }
 
     return (
         <div>
-            <div className="header">
-                <div className="location">
-                    {current?.location?.name}
-                </div>
-                <div className="temp">
-                    {current?.Temperature.Metric.Value}{' '}
-                    {current?.Temperature.Metric.Unit}
-                </div>
-                <div className="conditions">
-                    {current?.WeatherText}
-                    <br />
-                    H:{current?.WeatherIcon} L:{current?.WeatherIcon}
-                </div>
-            </div>
-
-            <div className="forecast">
-                <div className="forecast-title">HOURLY FORECAST</div>
-                <div className="scroller">
-                    <div className="forecast-list">
-                        {forecast.map(({ DateTime, Temperature }) => (
-                            <div className="forecast-item" key={DateTime}>
-                                <span>{formatHour(DateTime)}</span>
-                                <span>
-                                    <Thunder />
-                                </span>
-                                <span>
-                                    {Temperature.Value} {Temperature.Unit}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            <div className="daily">
-                <div className="daily-title">10-DAY FORECAST</div>
-                <div className="daily-list">
-                    {daily.map(
-                        ({
-                            Date,
-                            Temperature: { Minimum, Maximum },
-                            Day: { Icon, IconPhrase },
-                        }) => (
-                            <div className="daily-row">
-                                <div className="daily-time">
-                                    {formatWeekday(Date)}
-                                </div>
-
-                                <div className="daily-conditions">
-                                    <Rain />
-                                    <span className="probability">60%</span>
-                                </div>
-
-                                <div className="daily-range">
-                                    <span className="daily-min">
-                                        {Minimum.Value} {Minimum.Unit}
-                                    </span>
-                                    <span className="range">
-                                        <span className="range-meter" />
-                                        <span className="range-current" />
-                                    </span>
-                                    <span className="daily-max">
-                                        {Maximum.Value} {Maximum.Unit}
-                                    </span>
-                                </div>
-                            </div>
-                        )
-                    )}
-                </div>
-            </div>
+            <Header current={current} />
+            <HourlyForecast forecast={forecast} />
+            <DailyForecast daily={daily} />
         </div>
     )
 }

@@ -1,245 +1,272 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family:
+        -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+        Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
-  font-size: 10px;
+    font-size: 10px;
 }
 
 body {
-  margin: 0;
-  font-size: 1.6rem;
+    margin: 0;
+    font-size: 1.6rem;
 }
 
 #root {
-  display: grid;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
+    display: grid;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
 
-  color: white;
+    color: white;
 }
 #root.morning {
-  background: linear-gradient(to bottom, #81C5E5, #DC927F);
+    background: linear-gradient(to bottom, #81c5e5, #dc927f);
 }
 #root.afternoon {
-  background: linear-gradient(to bottom, #4982AD, #90BBD880);
+    background: linear-gradient(to bottom, #4982ad, #90bbd880);
 }
 #root.evening {
-  background: linear-gradient(to bottom, #6F6D8C, #BC615A);
+    background: linear-gradient(to bottom, #6f6d8c, #bc615a);
 }
 #root.night {
-  background: linear-gradient(to bottom, #011e33, #3D3551);
+    background: linear-gradient(to bottom, #011e33, #3d3551);
 }
 
 #root > div {
-  min-width: 320px;
-  max-width: 460px;
-  padding: 10px;
+    min-width: 320px;
+    max-width: 460px;
+    padding: 10px;
 }
 
 .header {
-  font-weight: 400;
-  text-align: center;
-  margin: 50px 0 40px;
+    font-weight: 400;
+    text-align: center;
+    margin: 50px 0 40px;
 }
 
 .location {
-  font-size: 3.7rem;
+    font-size: 3.7rem;
 }
 
 .temp {
-  font-size: 102px;
-  line-height: 102px;
-  font-weight: 100;
+    font-size: 102px;
+    line-height: 102px;
+    font-weight: 100;
 }
 
 .conditions {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 .forecast {
-  border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  padding: 15px 15px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 15px 15px;
 }
 
 .forecast-title {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-  font-size: 0.8em;
-  letter-spacing: 0.05em;
-  padding-bottom: 8px;
-  font-weight: 400;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    font-size: 0.8em;
+    letter-spacing: 0.05em;
+    padding-bottom: 8px;
+    font-weight: 400;
 }
 
 .scroller {
-  overflow: hidden;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
 }
 
 .forecast-list {
-  display: flex;
+    display: flex;
+    gap: 15px;
+    padding: 10px;
 }
 
 .forecast-item {
-  width: 45px;
-  min-width: 45px;
-  text-align: center;
-  margin: 0 10px;
-  padding: 10px 0 0;
+    width: 45px;
+    min-width: 45px;
+    text-align: center;
+    margin: 0 10px;
+    padding: 10px 0 0;
 }
 
 .forecast-item:first-child {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 .forecast-item:last-child {
-  margin-right: 0;
+    margin-right: 0;
 }
 
 .forecast-item span {
-  display: block;
+    display: block;
+    font-size: 15px;
 }
 
 .forecast-item span + span {
-  margin: 15px 0 0;
+    margin: 15px 0 0;
 }
 
 .daily {
-  margin: 10px 0 0 0;
-  border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  padding: 15px 15px;
+    margin: 10px 0 0 0;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 15px 15px;
 }
 
 .daily-title,
 .daily-row {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .daily-title {
-  font-size: 1.3rem;
-  letter-spacing: 0.05em;
-  padding-bottom: 8px;
-  font-weight: 400;
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    padding-bottom: 8px;
+    font-weight: 400;
 }
 
 .daily-row {
-  padding: 5px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 2rem;
+    padding: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
 }
 
 .daily-row:last-child {
-  border-bottom: 0;
+    border-bottom: 0;
 }
 
 .daily-range {
-  width: 155px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    width: 155px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.daily-time {
+    font-size: 1.2rem;
+    text-align: left;
+    width: 33%;
 }
 
 .daily-min,
 .daily-max {
-  width: 30px;
-  text-align: center;
+    width: 30px;
+    text-align: center;
 }
 
 .daily-min {
-  opacity: 0.5;
+    opacity: 0.5;
 }
 
 .daily-conditions {
-  text-align: center;
-  line-height: 1;
+    text-align: left;
+    line-height: 1;
+    width: 33%;
 }
 
 .daily-conditions svg {
-  max-width: 20px;
+    max-width: 20px;
 }
 
-.probability {
-  display: block;
-  font-size: 12px;
-  line-height: 0.8;
-  margin: -5px 0 5px;
-  color: #81cffa;
+.condition {
+    color: #81cffa; 
+    font-size: 0.8rem;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.no-data {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.6rem;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 /* Shows the range of lowest and highest 
-   temperatures of the 10-day period */
+     temperatures of the 10-day period */
 .range {
-  flex: 1;
-  background-color: rgba(0, 0, 0, 0.15);
-  height: 4px;
-  border-radius: 5px;
-  position: relative;
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.15);
+    height: 4px;
+    border-radius: 5px;
+    position: relative;
 }
 
 /* Shows the range of lowest and highest 
-   temperatures of each day in comparison 
-   to the range of the whole period */
+     temperatures of each day in comparison 
+     to the range of the whole period */
 .range-meter {
-  --left: 10%;
-  --right: 0%;
+    --left: 10%;
+    --right: 0%;
 
-  position: absolute;
-  left: var(--left);
-  right: var(--right);
-  top: 0;
-  bottom: 0;
+    position: absolute;
+    left: var(--left);
+    right: var(--right);
+    top: 0;
+    bottom: 0;
 
-  border-radius: 5px;
-  overflow: hidden;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .range-meter::after {
-  content: '';
-  display: block;
-  position: absolute;
+    content: '';
+    display: block;
+    position: absolute;
 
-  top: 0;
-  bottom: 0;
-  left: calc(-1 * var(--left));
-  right: calc(-1 * var(--right));
+    top: 0;
+    bottom: 0;
+    left: calc(-1 * var(--left));
+    right: calc(-1 * var(--right));
 
-  background: linear-gradient(to right, #96d0a7, #ef8734);
-  background-size: 80px 100%;
-  background-position: center;
-  border-radius: 5px;
+    background: linear-gradient(to right, #96d0a7, #ef8734);
+    background-size: 80px 100%;
+    background-position: center;
+    border-radius: 5px;
 }
 
 /* Loading Indicator Styles */
 .loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #f0f0f0;
-  color: #333;
-  font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    color: #333;
+    font-family: Arial, sans-serif;
 }
 
 .loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #ccc;
-  border-top: 4px solid #007bff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 10px;
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ccc;
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

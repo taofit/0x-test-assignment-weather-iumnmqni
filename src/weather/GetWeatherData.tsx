@@ -7,7 +7,9 @@ import {
 
 const apiKey = process.env.REACT_APP_ACCUWEATHER_API_KEY || ''
 
-export const GetWeatherDaily = async (locationKey: string): Promise<DailyForecastsResponse[]> => {
+export const GetWeatherDaily = async (
+    locationKey: string
+): Promise<DailyForecastsResponse[]> => {
     const apiUrl = `/api/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}`
 
     try {
@@ -27,7 +29,9 @@ export const GetWeatherDaily = async (locationKey: string): Promise<DailyForecas
     }
 }
 
-export const GetWeatherHourly = async (locationKey: string): Promise<HourlyResponse[]> => {
+export const GetWeatherHourly = async (
+    locationKey: string
+): Promise<HourlyResponse[]> => {
     const apiUrl = `/api/forecasts/v1/hourly/12hour/${locationKey}?apikey=${apiKey}`
 
     try {
@@ -50,7 +54,9 @@ export const GetWeatherHourly = async (locationKey: string): Promise<HourlyRespo
     }
 }
 
-export const GetCurrentWeather = async (locationKey: string): Promise<CurrentResponse> => {
+export const GetCurrentWeather = async (
+    locationKey: string
+): Promise<CurrentResponse> => {
     const apiUrl = `/api/currentconditions/v1/${locationKey}?apikey=${apiKey}`
     try {
         const response = await fetch(apiUrl)
@@ -67,7 +73,10 @@ export const GetCurrentWeather = async (locationKey: string): Promise<CurrentRes
     }
 }
 
-export const GetGeoLocation = async (lat: number, lon: number): Promise<LocationResponse> => {
+export const GetGeoLocation = async (
+    lat: number,
+    lon: number
+): Promise<LocationResponse> => {
     const apiUrl = `/api/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat},${lon}`
 
     try {
