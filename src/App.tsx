@@ -26,6 +26,7 @@ export default function App() {
     const [daily, setDaily] = useState<DailyForecastsResponse[]>([])
     const [loading, setLoading] = useState(true)
     const [locationKey, setLocationKey] = useState<string | null>(null)
+    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         const loadLocalStorage = () => {
@@ -87,6 +88,7 @@ export default function App() {
                 return
             }
             setLoading(true) // Set loading to true before fetching data
+            setError(null)
             try {
                 GetGeoLocation
                 const [daily, forecast, current] = await Promise.all([
@@ -113,12 +115,12 @@ export default function App() {
                     JSON.stringify({ ...current, location: current.location })
                 )
             } catch (error) {
-                console.error('Error fetching weather data:', error)
+                const errorMessage =
+                    error instanceof Error ? error.message : 'Unknown error'
+                setError(`${errorMessage}. Please try again later.`)
             } finally {
                 setLoading(false) // Set loading to false after data is fetched
             }
-
-            setLoading(false) // Set loading to false after data is fetched
         }
 
         fetchWeatherData()
@@ -135,6 +137,10 @@ export default function App() {
 
     if (loading) {
         return <Loading />
+    }
+
+    if (error) {
+        return <div className="error">{error}</div>
     }
 
     return (
