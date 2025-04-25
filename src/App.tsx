@@ -55,7 +55,7 @@ export default function App() {
                     setLocation(JSON.parse(location))
                 }
             } catch (error) {
-                console.error('Error parsing local storage data:', error)
+                setError('Failed to load data from local storage.')
             } finally {
                 setLoading(false) // Set loading to false after attempting to load data
             }
@@ -65,16 +65,22 @@ export default function App() {
 
     useEffect(() => {
         const fetchLocation = async (lat: number, lon: number) => {
-            const locationResponse = await GetGeoLocation(lat, lon)
-            const { Key, EnglishName } = locationResponse
-            localStorage.setItem('locationKey', Key)
-            setLocationKey(Key)
+            try {
+                const locationResponse = await GetGeoLocation(lat, lon)
+                const { Key, EnglishName } = locationResponse
+                localStorage.setItem('locationKey', Key)
+                setLocationKey(Key)
 
-            setLocation({ name: EnglishName, lat, lon })
-            localStorage.setItem(
-                'location',
-                JSON.stringify({ name: EnglishName, lat, lon })
-            )
+                setLocation({ name: EnglishName, lat, lon })
+                localStorage.setItem(
+                    'location',
+                    JSON.stringify({ name: EnglishName, lat, lon })
+                )
+            } catch (error) {
+                const errorMessage =
+                    error instanceof Error ? error.message : 'Unknown error'
+                setError(`${errorMessage}. Please try again later.`)
+            }
         }
         navigator.geolocation.getCurrentPosition((pos) => {
             const { latitude: lat, longitude: lon } = pos.coords
@@ -141,6 +147,9 @@ export default function App() {
 
     if (error) {
         return <div className="error">{error}</div>
+    }
+    if (locationKey === null || current === null) {
+        return <div className="error">location is not found</div>
     }
 
     return (

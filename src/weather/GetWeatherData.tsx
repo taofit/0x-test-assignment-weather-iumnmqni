@@ -10,7 +10,7 @@ const apiKey = process.env.REACT_APP_ACCUWEATHER_API_KEY || ''
 export const GetWeatherDaily = async (
     locationKey: string
 ): Promise<DailyForecastsResponse[]> => {
-    const apiUrl = `/api/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}`
+    const apiUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${apiKey}`
 
     try {
         const response = await fetch(apiUrl)
@@ -32,7 +32,7 @@ export const GetWeatherDaily = async (
 export const GetWeatherHourly = async (
     locationKey: string
 ): Promise<HourlyResponse[]> => {
-    const apiUrl = `/api/forecasts/v1/hourly/12hour/${locationKey}?apikey=${apiKey}`
+    const apiUrl = `http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=${apiKey}`
 
     try {
         const response = await fetch(apiUrl)
@@ -57,7 +57,7 @@ export const GetWeatherHourly = async (
 export const GetCurrentWeather = async (
     locationKey: string
 ): Promise<CurrentResponse> => {
-    const apiUrl = `/api/currentconditions/v1/${locationKey}?apikey=${apiKey}`
+    const apiUrl = `http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${apiKey}`
     try {
         const response = await fetch(apiUrl)
         if (!response.ok) {
@@ -77,7 +77,7 @@ export const GetGeoLocation = async (
     lat: number,
     lon: number
 ): Promise<LocationResponse> => {
-    const apiUrl = `/api/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat},${lon}`
+    const apiUrl = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat},${lon}`
 
     try {
         const response = await fetch(apiUrl)
@@ -90,7 +90,7 @@ export const GetGeoLocation = async (
         return data
     } catch (error) {
         console.error('Error fetching location data:', error)
-        throw error // Or return a default/fallback response
+        throw error
     }
 }
 
