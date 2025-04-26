@@ -2,7 +2,7 @@ import React from 'react'
 import { HourlyResponse } from '../types/types'
 
 import { formatHour } from '../utils/date'
-import { FahrenheitToCelsius } from '../utils/FToC'
+import { GetTemperature } from '../utils/ParseTemperature'
 import { GetWeatherIcon } from '../weather/GetWeatherIcon'
 
 interface HourlyForecastProps {
@@ -23,7 +23,7 @@ export const HourlyForecast: React.FC<HourlyForecastProps> = ({ forecast }) => {
                             <span>{formatHour(DateTime)}</span>
                             <span>{GetWeatherIcon(IconPhrase)}</span>
                             <span>
-                                {FahrenheitToCelsius(Temperature.Value)}°
+                                {GetTemperature(Temperature)}°
                             </span>
                         </div>
                     ))}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { DailyForecastsResponse } from '../types/types'
 import { formatWeekday } from '../utils/date'
-import { FahrenheitToCelsius } from '../utils/FToC'
+import { GetTemperature } from '../utils/ParseTemperature'
 import { GetWeatherIcon } from '../weather/GetWeatherIcon'
 
 interface DailyForecastProps {
@@ -37,14 +37,14 @@ export const DailyForecast: React.FC<DailyForecastProps> = ({ daily }) => {
                                 </div>
                                 <div className="daily-range">
                                     <span className="daily-min">
-                                        {FahrenheitToCelsius(Minimum.Value)}°
+                                        {GetTemperature(Minimum)}°
                                     </span>
                                     <span className="range">
                                         <span className="range-meter" />
                                         <span className="range-current" />
                                     </span>
                                     <span className="daily-max">
-                                        {FahrenheitToCelsius(Maximum.Value)}°
+                                        {GetTemperature(Maximum)}°
                                     </span>
                                 </div>
                             </div>

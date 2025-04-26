@@ -1,6 +1,6 @@
 import React from 'react'
 import { CurrentResponse } from '../types/types'
-import { FahrenheitToCelsius } from '../utils/FToC'
+import { FahrenheitToCelsius } from '../utils/ParseTemperature'
 
 type HeaderProps = {
     current: CurrentResponse | null

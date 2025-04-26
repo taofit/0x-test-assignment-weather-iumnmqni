@@ -7,7 +7,7 @@ if (!rootElement) {
   throw new Error('Root element not found');
 }
 const root = createRoot(rootElement);
-console.log('Starting React app');
+
 root.render(
   <StrictMode>
     <App />
