@@ -3,6 +3,7 @@ import { DailyForecastsResponse } from '../types/types'
 import { formatWeekday } from '../utils/date'
 import { GetTemperature } from '../utils/ParseTemperature'
 import { GetWeatherIcon } from '../weather/GetWeatherIcon'
+import { Forecast } from 'src/weather/forecast'
 
 interface DailyForecastProps {
     daily: DailyForecastsResponse[]
@@ -11,7 +12,7 @@ interface DailyForecastProps {
 export const DailyForecast: React.FC<DailyForecastProps> = ({ daily }) => {
     return (
         <div className="daily">
-            <div className="daily-title">5-DAY FORECAST</div>
+            <div className="daily-title"><Forecast />5-DAY FORECAST</div>
             <div className="daily-list">
                 {daily.length === 0 && (
                     <div className="no-data">No weather data available</div>

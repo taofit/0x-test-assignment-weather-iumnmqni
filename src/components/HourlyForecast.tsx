@@ -4,6 +4,7 @@ import { HourlyResponse } from '../types/types'
 import { formatHour } from '../utils/date'
 import { GetTemperature } from '../utils/ParseTemperature'
 import { GetWeatherIcon } from '../weather/GetWeatherIcon'
+import { Forecast } from 'src/weather/forecast'
 
 interface HourlyForecastProps {
     forecast: HourlyResponse[]
@@ -12,7 +13,7 @@ interface HourlyForecastProps {
 export const HourlyForecast: React.FC<HourlyForecastProps> = ({ forecast }) => {
     return (
         <div className="forecast">
-            <div className="forecast-title">HOURLY FORECAST</div>
+            <div className="forecast-title"><Forecast />HOURLY FORECAST</div>
             <div className="scroller">
                 <div className="forecast-list">
                     {forecast.length === 0 && (

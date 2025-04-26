@@ -3,6 +3,9 @@ export const formatHour = (date: string): string => {
         hour: '2-digit',
         hour12: true,
     }
+    if (new Date(date).getDate() === new Date().getDate() && new Date(date).getHours() === new Date().getHours()) {
+        return 'Now';
+    }
     return new Date(date).toLocaleString('en-US', options)
 }
 
