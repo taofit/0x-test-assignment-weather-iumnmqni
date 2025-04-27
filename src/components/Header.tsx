@@ -3,19 +3,19 @@ import { CurrentResponse } from '../types/types'
 import { FahrenheitToCelsius } from '../utils/ParseTemperature'
 
 type HeaderProps = {
-    current: CurrentResponse | null
+    current: CurrentResponse
 }
 
 export const Header: React.FC<HeaderProps> = ({ current }) => (
     <div className="header">
-        <div className="location">{current?.location?.name}</div>
+        <div className="location">{current.location?.name}</div>
         <div className="temp">
-            {current?.Temperature.Metric.Value}°
+            {Math.floor(current.Temperature.Metric.Value)}°
         </div>
         <div className="conditions">
-            {current?.WeatherText}
+            {current.WeatherText}
             <br />
-            {current?.temperatureRange ? (
+            {current.temperatureRange ? (
                 <>
                     H:{FahrenheitToCelsius(current.temperatureRange[1])}°
                     L:{FahrenheitToCelsius(current.temperatureRange[0])}°
