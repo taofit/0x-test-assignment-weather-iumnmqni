@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/0x-test-assignment-weather-iumnmqni/static/css/main.dcfe6504.css",
-    "main.js": "/0x-test-assignment-weather-iumnmqni/static/js/main.e4b43d90.js",
+    "main.js": "/0x-test-assignment-weather-iumnmqni/static/js/main.9e3e2c60.js",
     "index.html": "/0x-test-assignment-weather-iumnmqni/index.html",
     "main.dcfe6504.css.map": "/0x-test-assignment-weather-iumnmqni/static/css/main.dcfe6504.css.map",
-    "main.e4b43d90.js.map": "/0x-test-assignment-weather-iumnmqni/static/js/main.e4b43d90.js.map"
+    "main.9e3e2c60.js.map": "/0x-test-assignment-weather-iumnmqni/static/js/main.9e3e2c60.js.map"
   },
   "entrypoints": [
     "static/css/main.dcfe6504.css",
-    "static/js/main.e4b43d90.js"
+    "static/js/main.9e3e2c60.js"
   ]
 }
